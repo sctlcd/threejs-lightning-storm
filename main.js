@@ -6,7 +6,9 @@ const scene = new THREE.Scene();
 
 // Define camera: .PerspectiveCamera(field of view in degree, aspect ratio = width / height, near, far) 
 const camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
+// Add camera position
 camera.position.z = 1;
+// Add camera rotation
 camera.rotation.x = 1.16;
 camera.rotation.y = -0.12;
 camera.rotation.z = 0.27;
@@ -20,11 +22,11 @@ directionalLight.position.set( 0,0,1 );
 // Add ambiant light and directional light to scene
 scene.add( ambiant,directionalLight );
 
-// const renderer = new THREE.WebGLRenderer();
+// Define render
 const renderer = new THREE.WebGLRenderer( { antialias: true } );
-// add fog to scene
+// Add fog to scene
 scene.fog = new THREE.FogExp2( 0x11111f, 0.002 );
 renderer.setClearColor( scene.fog.color );
 renderer.setSize( window.innerWidth, window.innerHeight );
-// add renderer to HTML as a canvas element
+// Add renderer to HTML as a canvas element
 document.body.appendChild( renderer.domElement );
