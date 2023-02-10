@@ -9,9 +9,16 @@ import * as THREE from 'three';
 // Define scene
 const scene = new THREE.Scene();
 
-// Define camera
+// Define camera: .PerspectiveCamera(field of view in degree, aspect ratio = width / height, near, far) 
 const camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
+camera.position.z = 1;
+camera.rotation.x = 1.16;
+camera.rotation.y = -0.12;
+camera.rotation.z = 0.27;
 
+// Define anbiant light: Illuminate all objects in the scene from all direction
+const ambiant = new THREE.AmbientLight(0x555555);
+scene.add(ambiant);
 
 // const geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
 // const material = new THREE.MeshNormalMaterial();
