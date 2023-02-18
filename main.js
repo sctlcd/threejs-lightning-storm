@@ -60,9 +60,9 @@ function init() {
   // Define Texture loader
   const loader = new THREE.TextureLoader();
   // Set Texture loader
-  const texture1 = loader.load("./assets/textures/vecteezy_rain-clouds-and-black-sky-textured-background_10123744_360-min.jpg");
-  const texture2 = loader.load("./assets/textures/vecteezy_rain-clouds-and-black-sky-textured-background_10121810_444-min.jpg");
-  const texture3 = loader.load("./assets/textures/vecteezy_rain-clouds-and-black-sky-textured-background_10121519_408-min.jpg");
+  const texture1 = loader.load("./images/textures/vecteezy_rain-clouds-and-black-sky-textured-background_10123744_360-min.jpg");
+  const texture2 = loader.load("./images/textures/vecteezy_rain-clouds-and-black-sky-textured-background_10121810_444-min.jpg");
+  const texture3 = loader.load("./images/textures/vecteezy_rain-clouds-and-black-sky-textured-background_10121519_408-min.jpg");
 
   // Cloud 1
   // Define a geometry - 2000 unit plain square
