@@ -11,8 +11,11 @@ const flash = new THREE.PointLight(0x062d89, 30, 500 ,1.7);
 const renderer = new THREE.WebGLRenderer( { antialias: true } );
 const cloudParticles1 = [];
 const cloudParticles2 = [];
-// Define orbitControls
-const controls = new OrbitControls(camera, renderer.domElement);
+const cloudParticles3 = [];
+
+// // Define orbitControls
+// const controls = new OrbitControls(camera, renderer.domElement);
+
 
 // make canvas responsive
 window.addEventListener('resize', () => {
@@ -57,8 +60,9 @@ function init() {
   // Define Texture loader
   const loader = new THREE.TextureLoader();
   // Set Texture loader
-  const texture1 = loader.load("./assets/textures/vecteezy_rain-clouds-and-black-sky-textured-background_10123744_360.jpg");
-  const texture2 = loader.load("./assets/textures/vecteezy_rain-clouds-and-black-sky-textured-background_10121810_444.jpg");
+  const texture1 = loader.load("./assets/textures/vecteezy_rain-clouds-and-black-sky-textured-background_10123744_360-min.jpg");
+  const texture2 = loader.load("./assets/textures/vecteezy_rain-clouds-and-black-sky-textured-background_10121810_444-min.jpg");
+  const texture3 = loader.load("./assets/textures/vecteezy_rain-clouds-and-black-sky-textured-background_10121519_408-min.jpg");
 
   // Cloud 1
   // Define a geometry - 2000 unit plain square
@@ -91,28 +95,52 @@ function init() {
     scene.add(cloud1);
   }
 
-  // Cloud 2
-  const cloudGeometry2 = new THREE.PlaneBufferGeometry(2000,2000);
-  const cloudMaterial2 = new THREE.MeshLambertMaterial({
-    map: texture2,
+  // // Cloud 2
+  // const cloudGeometry2 = new THREE.PlaneBufferGeometry(2000,2000);
+  // const cloudMaterial2 = new THREE.MeshLambertMaterial({
+  //   map: texture2,
+  //   transparent: true
+  // });
+
+  // for(let p=0; p<25; p++) {
+  //   const cloud2 = new THREE.Mesh(cloudGeometry2, cloudMaterial2);
+  //   cloud2.position.set(
+  //     Math.random()*800 -400,
+  //     500,
+  //     Math.random()*500 - 450
+  //   );
+  //   cloud2.rotation.x = 1.16;
+  //   cloud2.rotation.y = -0.12;
+  //   cloud2.rotation.z = Math.random()*360;
+  //   cloud2.material.opacity = 0.6;
+
+  //   cloudParticles2.push(cloud2);
+    
+  //   scene.add(cloud2);
+  // }
+
+  // Cloud 3
+  const cloudGeometry3 = new THREE.PlaneBufferGeometry(2000,2000);
+  const cloudMaterial3 = new THREE.MeshLambertMaterial({
+    map: texture3,
     transparent: true
   });
 
   for(let p=0; p<25; p++) {
-    const cloud2 = new THREE.Mesh(cloudGeometry2, cloudMaterial2);
-    cloud2.position.set(
+    const cloud3 = new THREE.Mesh(cloudGeometry3, cloudMaterial3);
+    cloud3.position.set(
       Math.random()*800 -400,
       500,
       Math.random()*500 - 450
     );
-    cloud2.rotation.x = 1.16;
-    cloud2.rotation.y = -0.12;
-    cloud2.rotation.z = Math.random()*360;
-    cloud2.material.opacity = 0.6;
+    cloud3.rotation.x = 1.16;
+    cloud3.rotation.y = -0.12;
+    cloud3.rotation.z = Math.random()*360;
+    cloud3.material.opacity = 0.5;
 
-    cloudParticles2.push(cloud2);
+    cloudParticles3.push(cloud3);
     
-    scene.add(cloud2);
+    scene.add(cloud3);
   }
 
   rendering();
@@ -126,6 +154,10 @@ function rendering() {
 
   cloudParticles2.forEach(p => {
     p.rotation.z -=0.0001;
+  });
+
+  cloudParticles3.forEach(p => {
+    p.rotation.z -=0.0002;
   });
 
   // Random the flash position and light intensity 
@@ -142,9 +174,6 @@ function rendering() {
 
   // rerender every time the page refreshes (pause when on another tab)
   requestAnimationFrame(rendering);
-
-  // update OrbitControls controls 
-  controls.update();
 
   renderer.render(scene, camera);
 }
