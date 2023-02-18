@@ -1,5 +1,6 @@
 import './assets/style/style.css';
 import * as THREE from 'three';
+import { OrbitControls } from '/node_modules/three/examples/jsm/controls/OrbitControls';
 
 // Define scene
 const scene = new THREE.Scene();
@@ -10,6 +11,18 @@ const flash = new THREE.PointLight(0x062d89, 30, 500 ,1.7);
 const renderer = new THREE.WebGLRenderer( { antialias: true } );
 const cloudParticles1 = [];
 const cloudParticles2 = [];
+// Define orbitControls
+const controls = new OrbitControls(camera, renderer.domElement);
+
+// make canvas responsive
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight; // update aspect ratio
+  camera.updateProjectionMatrix(); // apply changes
+
+  renderer.setSize(window.innerWidth, window.innerHeight); // update size
+  renderer.setPixelRatio(window.devicePixelRatio); // use to render at the native screen resolution
+  // renderer.render(scene, camera); // Not needed since it is called in rendering()
+});
 
 function init() {
   // Set camera position
@@ -36,15 +49,16 @@ function init() {
   // Add fog into scene
   scene.fog = new THREE.FogExp2( 0x11111f, 0.002 );
   renderer.setClearColor( scene.fog.color );
-  renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer.setSize( window.innerWidth, window.innerHeight ); 
+
   // Add renderer into HTML as a canvas element
   document.body.appendChild( renderer.domElement );
 
   // Define Texture loader
   const loader = new THREE.TextureLoader();
   // Set Texture loader
-  const texture1 = loader.load("./images/vecteezy_rain-clouds-and-black-sky-textured-background_10123744_360.jpg");
-  const texture2 = loader.load("./images/vecteezy_rain-clouds-and-black-sky-textured-background_10121810_444.jpg");
+  const texture1 = loader.load("./assets/textures/vecteezy_rain-clouds-and-black-sky-textured-background_10123744_360.jpg");
+  const texture2 = loader.load("./assets/textures/vecteezy_rain-clouds-and-black-sky-textured-background_10121810_444.jpg");
 
   // Cloud 1
   // Define a geometry - 2000 unit plain square
@@ -101,10 +115,10 @@ function init() {
     scene.add(cloud2);
   }
 
-  animate();
+  rendering();
 };
 
-function animate() {
+function rendering() {
   // In the array of clouds rotate the cloud one by one
   cloudParticles1.forEach(p => {
     p.rotation.z -=0.0004;
@@ -124,8 +138,15 @@ function animate() {
       );
     flash.power = 50 + Math.random() * 500;
   }
+  // renderer.render(scene, camera);
+
+  // rerender every time the page refreshes (pause when on another tab)
+  requestAnimationFrame(rendering);
+
+  // update OrbitControls controls 
+  controls.update();
+
   renderer.render(scene, camera);
-  requestAnimationFrame(animate);
 }
 
 init();
