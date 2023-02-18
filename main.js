@@ -136,7 +136,7 @@ function init() {
     cloud3.rotation.x = 1.16;
     cloud3.rotation.y = -0.12;
     cloud3.rotation.z = Math.random()*360;
-    cloud3.material.opacity = 0.5;
+    cloud3.material.opacity = 0.8;
 
     cloudParticles3.push(cloud3);
     
@@ -149,12 +149,12 @@ function init() {
 function rendering() {
   // In the array of clouds rotate the cloud one by one
   cloudParticles1.forEach(p => {
-    p.rotation.z -=0.0004;
+    p.rotation.z -=0.0003;
   });
 
-  cloudParticles2.forEach(p => {
-    p.rotation.z -=0.0001;
-  });
+  // cloudParticles2.forEach(p => {
+  //   p.rotation.z -=0.0001;
+  // });
 
   cloudParticles3.forEach(p => {
     p.rotation.z -=0.0002;
