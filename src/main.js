@@ -11,5 +11,5 @@ function main() {
   world.render();
 }
 
-// Call the main funcction to start the app
+// Call the main function to start the app
 main();
