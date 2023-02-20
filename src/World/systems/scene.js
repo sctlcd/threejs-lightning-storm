@@ -11,4 +11,3 @@ function createScene() {
 }
 
 export { createScene };
-
