@@ -1,5 +1,5 @@
 import { createCamera } from './components/camera';
-import { createCube } from './components/cube.js';
+import { createCloud } from './components/cloud.js';
 import { createScene } from './components/scene.js';
 
 import { createRenderer } from './systems/renderer.js';
@@ -17,9 +17,9 @@ class World {
   renderer = createRenderer();
   container.append(renderer.domElement);
 
-  const cube = createCube();
+  // const cloud = createCloud();
 
-  scene.add(cube);
+  // scene.add(cloud);
 
   const resizer = new Resizer(container, camera, renderer);
 }

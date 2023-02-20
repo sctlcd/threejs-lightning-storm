@@ -6,7 +6,7 @@ import { Scene, Color } from "three";
 function createScene() {
   // Create an instance of the Scene
   const scene = new Scene();
-  scene.background = new Color('red');
+  scene.background = new Color('black');
   return scene;
 }
 

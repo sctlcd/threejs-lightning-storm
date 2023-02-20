@@ -29,3 +29,4 @@ dist-ssr
 
 main-copy.js
 /src/World/components/cube.js
+/src/World/components/cloud.js
