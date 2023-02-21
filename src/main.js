@@ -1,15 +1,17 @@
-import { World } from '../src/World/World'
+import { World } from './World/World.js';
 
+/**  Function to create the Main module
+  *  @return -
+  */
 function main() {
-  // Get a reference to the canvas element
-  const container = document.querySelector('#canvas');
+  // Get a reference to the container element
+  const container = document.querySelector('#scene-container');
 
-  // Create an instance of the World app
+  // 1. Create an instance of the World app
   const world = new World(container);
 
-  // Render the scene
+  // 2. Render the scene
   world.render();
 }
 
-// Call the main function to start the app
 main();
