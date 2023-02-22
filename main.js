@@ -66,7 +66,7 @@ scene.add(directionalLight);
 /***************************************************** Point Light */
 
 // Define lightning flash: Setup a pointLight with blue color
-const flash = new THREE.PointLight(0x2D32B5, 50, 800, 2.5);
+const flash = new THREE.PointLight(0x586AAC, 50, 800, 2.5);
 // Set lightning flash position behind the cloud
 flash.position.set(200,300, 100);
 scene.add(flash);
