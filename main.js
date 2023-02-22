@@ -2,12 +2,14 @@ import './assets/style/style.css';
 import * as THREE from 'three';
 // import { OrbitControls } from '/node_modules/three/examples/jsm/controls/OrbitControls';
 
-// SCENE
+/***************************************************** Scene */
+
 const scene = new THREE.Scene();
 // Add fog into scene
 scene.fog = new THREE.FogExp2(0x11111f, 0.002);
 
 /***************************************************** Camera */
+
 // Define camera: .PerspectiveCamera(field of view in degree, aspect ratio = width / height, near, far) 
 const camera = new THREE.PerspectiveCamera(
   60, // fov = Field Of View
@@ -17,14 +19,10 @@ const camera = new THREE.PerspectiveCamera(
 );
 
 // Set camera position
-// camera.position.set(0, 0, 1);
-camera.position.z = 1;
+camera.position.set(0, 0, 1);
 
 // Set the rotation angle of th ecamera to look up into the sky
-// camera.rotation.set(1.16, -0.12, 0.27);
-camera.rotation.x = 1.16;
-camera.rotation.y = -0.12;
-camera.rotation.z = 0.27;
+camera.rotation.set(1.16, -0.12, 0.27);
 
 /***************************************************** Renderer */
 
@@ -35,15 +33,15 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 // Add renderer into HTML as a canvas element
 document.body.appendChild( renderer.domElement);
 
-/***************************************************** Make canvas responsive */
+/***************************************************** Resizer */
 
+// Make canvas responsive
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight; // update aspect ratio
   camera.updateProjectionMatrix(); // apply changes
 
   renderer.setSize(window.innerWidth, window.innerHeight); // update size
   renderer.setPixelRatio(window.devicePixelRatio); // use to render at the native screen resolution
-  // renderer.render(scene, camera); // Not needed since it is called in rendering()
 });
 
 /***************************************************** OrbitControls */
@@ -62,7 +60,6 @@ scene.add(ambient);
 const directionalLight = new THREE.DirectionalLight(0xffeedd);
 // By default, the light will seems to come from above. To change he position light, I must move the whole light
 directionalLight.position.set(0,0,1);
-// Add ambiant light and directional light into scene
 scene.add(directionalLight);
 
 
@@ -72,33 +69,7 @@ scene.add(directionalLight);
 const flash = new THREE.PointLight(0x0e0057, 50, 800, 2.5);
 // Set lightning flash position behind the cloud
 flash.position.set(200,300, 100);
-// Add lightning flash to the scene
 scene.add(flash);
-
-/***************************************************** Rain Drop Texture */
-
-// const rainCount=9500;
-// const cloudParticles=[];
-// const rainGeo = new THREE.Geometry();
-// for(let i=0; i<rainCount; i++) {
-//   const rainDrop = new THREE.Vector3(
-//     Math.random()*400-200,
-//     Math.random()*500-250,
-//     Math.random()*400-200
-//   )
-//   rainDrop.velocity = {};
-//   rainDrop.velocity = 0;
-//   rainGeo.vertices.push(rainDrop);
-// }
-
-// const rainMaterial = new THREE.PointsMaterial({
-//   color: 0xaaaaaa,
-//   size: 0.1,
-//   transparent: true
-// })
-
-// const rain = new THREE.Points(rainGeo, rainMaterial);
-// scene.add(rain)
 
 /***************************************************** Cloud Texture Loader */
 
@@ -109,6 +80,7 @@ const texture2 = loader.load("./images/textures/vecteezy_rain-clouds-and-black-s
 const texture3 = loader.load("./images/textures/vecteezy_rain-clouds-and-black-sky-textured-background_10121519_408-min.jpg");
 
 /************************************** Cloud 1 */
+
 const cloudParticles1 = [];
 // Define a geometry - 2000 unit plain square
 const cloudGeometry1 = new THREE.PlaneBufferGeometry(2000,2000);
@@ -209,18 +181,6 @@ function render() {
     p.rotation.z -=0.0003;
   });
   
-  // // RainDrop Animation
-  // rainGeo.vertices.forEach(p => {
-  //   p.velocity -= 3*Math.random()*1;
-  //   p.y += p.velocity;
-  //   if(p.y < -100){
-  //     p.y = 100;
-  //     p.velocity = 0;
-  //   }
-  // })
-  // rainGeo.verticesNeedUpdate = true;
-  // rain.rotation.y += 0.002;
-  
   // Lightening Animation: Random the flash position and light intensity
   if(Math.random() > 0.93 || flash.power > 100) {
     if(flash.power < 100) 
@@ -231,10 +191,11 @@ function render() {
       );
     flash.power = 50 + Math.random() * 500;
   }
-
-  renderer.render(scene, camera);
+  
   // rerender every time the page refreshes (pause when on another tab)
   requestAnimationFrame(render);
+
+  renderer.render(scene, camera);
 }
 
 render();
