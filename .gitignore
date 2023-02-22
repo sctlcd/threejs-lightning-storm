@@ -26,3 +26,9 @@ dist-ssr
 # Firebase files
 .firebaserc
 .firebase
+
+main-copy.js
+main-copy2.js
+/src/World/components/cloud.js
+/src/World/components/flash.js
+/src/World/components/camera.js
