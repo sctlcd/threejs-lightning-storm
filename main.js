@@ -1,6 +1,5 @@
 import './assets/style/style.css';
 import * as THREE from 'three';
-// import { OrbitControls } from '/node_modules/three/examples/jsm/controls/OrbitControls';
 
 /***************************************************** Scene */
 
@@ -43,10 +42,6 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight); // update size
   renderer.setPixelRatio(window.devicePixelRatio); // use to render at the native screen resolution
 });
-
-/***************************************************** OrbitControls */
-
-// const controls = new OrbitControls(camera, renderer.domElement);
 
 /***************************************************** Ambient Light */
 
@@ -199,12 +194,3 @@ function render() {
 }
 
 render();
-
-/***************************************************** Render */
-
-// Update Camera Aspect Ratio and Renderer ScreenSize on Window resize
-window.addEventListener( 'resize', function () {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize( window.innerWidth, window.innerHeight );
-}, false );
